@@ -20,8 +20,7 @@ class Nankai extends \Gini\Controller\CGI
     protected function getConfig()
     {
         $infos = (array)\Gini\Config::get('gapper.auth');
-        $info = (object)$infos['NK'];
-        return $info;
+        return (object)$infos['nankai'];
     }
 
     /** 
