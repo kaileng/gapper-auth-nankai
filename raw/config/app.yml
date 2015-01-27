@@ -1,0 +1,7 @@
+---
+rpc:
+  nankai_gateway:
+    url: http://nankai-gateway.gapper.in/api
+    client_id: <YOURCLIENTID>
+    client_secret: <YOURCLIENTSECRET>
+...
