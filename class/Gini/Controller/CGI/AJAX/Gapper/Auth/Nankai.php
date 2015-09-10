@@ -1,14 +1,12 @@
 <?php
-
 /**
- * @file Nankai.php
- * @brief 南开一卡通登录模块
- *
- * @author Hongjie Zhu
- *
- * @version 0.1.0
- * @date 2015-01-06
+* @file Nankai.php
+* @brief 南开一卡通登录模块
+* @author Hongjie Zhu
+* @version 0.1.0
+* @date 2015-01-06
  */
+
 namespace Gini\Controller\CGI\AJAX\Gapper\Auth;
 
 class Nankai extends \Gini\Controller\CGI
@@ -21,18 +19,17 @@ class Nankai extends \Gini\Controller\CGI
 
     protected function getConfig()
     {
-        $infos = (array) \Gini\Config::get('gapper.auth');
-
-        return (object) $infos['nankai'];
+        $infos = (array)\Gini\Config::get('gapper.auth');
+        return (object)$infos['nankai'];
     }
 
-    /**
-     * @brief 一卡通密码验证
-     *
-     * @param $username
-     * @param $password
-     *
-     * @return bool
+    /** 
+        * @brief 一卡通密码验证
+        *
+        * @param $username
+        * @param $password
+        *
+        * @return  boolean
      */
     protected function verify($username, $password)
     {
@@ -41,18 +38,17 @@ class Nankai extends \Gini\Controller\CGI
             $config = $config['nankai_gateway'];
             $api = $config['url'];
             $rpc = \Gini\IoC::construct('\Gini\RPC', $api);
-
             return !!$rpc->nankai->auth->verify($username, $password);
-        } catch (\Exception $e) {
         }
-
+        catch (\Exception $e) {
+        }
         return false;
     }
 
     /**
-     * @brief 执行登录逻辑
-     *
-     * @return
+        * @brief 执行登录逻辑
+        *
+        * @return 
      */
     public function actionLogin()
     {
@@ -87,22 +83,22 @@ class Nankai extends \Gini\Controller\CGI
                 return $this->showJSON(true);
             }
 
-            return $this->showJSON('没有安装此应用，请联系商城管理员！');
+            return $this->showJSON(T('Login failed! Please try again.'));
         }
+
     }
 
     /**
-     * @brief 获取登录表单
-     *
-     * @return
+        * @brief 获取登录表单
+        *
+        * @return 
      */
     public function actionGetForm()
     {
         $config = $this->getConfig();
-
         return $this->showHTML('gapper/auth/nankai/login', [
-            'icon' => $config->icon,
-            'type' => $config->name,
+            'icon'=> $config->icon,
+            'type'=> $config->name
         ]);
     }
 }
